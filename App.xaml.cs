@@ -12,7 +12,7 @@ namespace plz_fix
             _localizationResourceManager = localizationResourceManager;
             InitializeComponent();
 
-            MainPage = new NavigationPage(new pages.dash.MainTabbedPage());
+            MainPage = new NavigationPage(new pages.login.loginpage());
 
         }
 
