@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             xmlns:loc="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+             x:Class="plz_fix.pages.login.qrpage">
+    <!-- Background with Dark Mode Support -->
+    <ContentPage.Background>
+        <AppThemeBinding Light="{StaticResource BackgroundColorLight}" 
+                         Dark="{StaticResource BackgroundColorDark}" />
+    </ContentPage.Background>
+
+    <Grid>
+        <!-- Scan Instruction -->
+        <Label Text="{loc:Translate ScanInstruction}"
+               FontSize="26"
+               FontAttributes="Bold"
+               TextColor="{AppThemeBinding Light={StaticResource TextPrimaryColorLight}, 
+                                      Dark={StaticResource TextPrimaryColorDark}}"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               Margin="20"
+               IsVisible="{Binding IsScannerVisible}"/>
+
+        <!-- QR Scanner (Fixed Size, Centered) -->
+        <zxing:CameraBarcodeReaderView
+            x:Name="barcodeReader"
+            BarcodesDetected="barcodeReader_BarcodesDetected"
+            WidthRequest="300"
+            HeightRequest="300"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            IsVisible="{Binding IsScannerVisible}"
+            BackgroundColor="Transparent" />
+
+        <!-- Fullscreen Result Card -->
+        <Frame IsVisible="{Binding IsResultVisible}" 
+               Padding="30"
+               CornerRadius="20"
+               BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceColorLight}, 
+                                              Dark={StaticResource SurfaceColorDark}}"
+               BorderColor="{AppThemeBinding Light={StaticResource BorderColorLight}, 
+                                           Dark={StaticResource BorderColorDark}}"
+               HasShadow="True"
+               VerticalOptions="FillAndExpand"
+               HorizontalOptions="FillAndExpand"
+               Margin="20">
+
+            <VerticalStackLayout Spacing="30" Padding="20" VerticalOptions="FillAndExpand" HorizontalOptions="Center">
+                <!-- Title -->
+                <Label Text="{loc:Translate ScanResultTitle}"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="{AppThemeBinding Light={StaticResource TextPrimaryColorLight}, 
+                                              Dark={StaticResource TextPrimaryColorDark}}" />
+
+                <!-- Organized Information -->
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="{loc:Translate SchoolLabel}" FontAttributes="Bold" FontSize="26" HorizontalOptions="Center"/>
+                    <Label Text="{Binding School}" FontSize="26" HorizontalOptions="Center" 
+                           TextColor="{AppThemeBinding Light={StaticResource TextPrimaryColorLight}, 
+                                                  Dark={StaticResource TextPrimaryColorDark}}" />
+
+                    <Label Text="{loc:Translate TypeLabel}" FontAttributes="Bold" FontSize="26" HorizontalOptions="Center"/>
+                    <Label Text="{Binding Type}" FontSize="26" HorizontalOptions="Center"
+                           TextColor="{AppThemeBinding Light={StaticResource TextPrimaryColorLight}, 
+                                                  Dark={StaticResource TextPrimaryColorDark}}" />
+
+                    <Label Text="{loc:Translate SectionLabel}" FontAttributes="Bold" FontSize="26" HorizontalOptions="Center"/>
+                    <Label Text="{Binding Section}" FontSize="26" HorizontalOptions="Center"
+                           TextColor="{AppThemeBinding Light={StaticResource TextPrimaryColorLight}, 
+                                                  Dark={StaticResource TextPrimaryColorDark}}" />
+
+                    <Label Text="{loc:Translate ClassLabel}" FontAttributes="Bold" FontSize="26" HorizontalOptions="Center"/>
+                    <Label Text="{Binding Class}" FontSize="26" HorizontalOptions="Center"
+                           TextColor="{AppThemeBinding Light={StaticResource TextPrimaryColorLight}, 
+                                                  Dark={StaticResource TextPrimaryColorDark}}" />
+                </VerticalStackLayout>
+
+                <!-- Spacer to push buttons to the bottom -->
+                <BoxView HeightRequest="50"/>
+
+                <!-- Buttons at the bottom -->
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
+                    <Button Text="{loc:Translate RetryButton}"
+                            Clicked="OnScanButtonClicked"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryColorLight}, 
+                                                         Dark={StaticResource PrimaryColorDark}}"
+                            TextColor="White" 
+                            CornerRadius="12" 
+                            Padding="15,10" 
+                            WidthRequest="130" 
+                            FontSize="18"
+                            VerticalOptions="End"/>
+
+                    <Button Text="{loc:Translate JoinButton}"
+                            Clicked="OnJoinButtonClicked"
+                            BackgroundColor="Green"
+                            TextColor="White" 
+                            WidthRequest="130" 
+                            CornerRadius="12" 
+                            Padding="15,10" 
+                            FontSize="18"
+                            VerticalOptions="End"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>

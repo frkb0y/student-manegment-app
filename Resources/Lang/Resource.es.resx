@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<!-- Existing entries for the start page -->
+	<data name="PageTitle" xml:space="preserve">
+    <value>Aplicación de Gestión Escolar y Universitaria</value>
+  </data>
+	<data name="AppTitle" xml:space="preserve">
+    <value>Aplicación de Gestión Escolar y Universitaria</value>
+  </data>
+	<data name="Description" xml:space="preserve">
+    <value>Disfruta de estas herramientas de becas y preocúpate solo por estudiar</value>
+  </data>
+	<data name="GetStartedButton" xml:space="preserve">
+    <value>Comenzar</value>
+  </data>
+	<data name="SettingsButton" xml:space="preserve">
+    <value>Ajustes</value>
+  </data>
+	<!-- Entries for the register page -->
+	<data name="RegisterPageTitle" xml:space="preserve">
+    <value>Registrarse</value>
+  </data>
+	<data name="RegisterPageHeading" xml:space="preserve">
+    <value>Regístrate</value>
+  </data>
+	<data name="RegisterPageSubtitle" xml:space="preserve">
+    <value>Crea una cuenta para comenzar</value>
+  </data>
+	<data name="NameLabel" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+	<data name="NamePlaceholder" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+	<data name="EmailAddressLabel" xml:space="preserve">
+    <value>Correo Electrónico</value>
+  </data>
+	<data name="EmailAddressPlaceholder" xml:space="preserve">
+    <value>Correo Electrónico</value>
+  </data>
+	<data name="PasswordLabel" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+	<data name="PasswordPlaceholder" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+	<data name="ConfirmPasswordLabel" xml:space="preserve">
+    <value>Confirmar Contraseña</value>
+  </data>
+	<data name="ConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>Confirmar Contraseña</value>
+  </data>
+	<data name="TermsAndConditions" xml:space="preserve">
+    <value>He leído y acepto los Términos y Condiciones y la Política de Privacidad</value>
+  </data>
+	<data name="SignUpButton" xml:space="preserve">
+    <value>Registrarse</value>
+  </data>
+	<!-- Entries for the QR Scanner page -->
+	<data name="QRScannerPageTitle" xml:space="preserve">
+    <value>Escáner QR</value>
+  </data>
+	<data name="ScanInstruction" xml:space="preserve">
+    <value>📷 Por favor, escanea tu código QR</value>
+  </data>
+	<data name="ScanResultTitle" xml:space="preserve">
+    <value>Resultado del Escaneo</value>
+  </data>
+	<data name="SchoolLabel" xml:space="preserve">
+    <value>🏫 Escuela:</value>
+  </data>
+	<data name="TypeLabel" xml:space="preserve">
+    <value>📌 Tipo:</value>
+  </data>
+	<data name="SectionLabel" xml:space="preserve">
+    <value>📚 Sección:</value>
+  </data>
+	<data name="ClassLabel" xml:space="preserve">
+    <value>🎓 Clase:</value>
+  </data>
+	<data name="RetryButton" xml:space="preserve">
+    <value>🔄 Reintentar</value>
+  </data>
+	<data name="JoinButton" xml:space="preserve">
+    <value>✅ Unirse</value>
+  </data>
+	<!-- Entries for the login page -->
+	<data name="LoginPageTitle" xml:space="preserve">
+    <value>Página de Inicio de Sesión</value>
+  </data>
+	<data name="WelcomeText" xml:space="preserve">
+    <value>Bienvenido a la aplicación de Gestión Universitaria</value>
+  </data>
+	<data name="LoginPlaceholder" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+	<data name="PasswordPlaceholder" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+	<data name="ForgotPasswordLink" xml:space="preserve">
+    <value>¿Olvidaste tu contraseña?</value>
+  </data>
+	<data name="LoginButton" xml:space="preserve">
+    <value>Iniciar Sesión</value>
+  </data>
+	<data name="ContinueWithText" xml:space="preserve">
+    <value>o continuar con:</value>
+  </data>
+	<!-- Entries for the setting page -->
+	<data name="Settings" xml:space="preserve">
+    <value>Ajustes</value>
+  </data>
+	<data name="DarkMode" xml:space="preserve">
+    <value>Modo Oscuro</value>
+  </data>
+	<data name="Language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+</root>

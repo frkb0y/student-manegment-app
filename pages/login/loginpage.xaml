@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="plz_fix.pages.login.loginpage">
+
+    <ContentPage.Background>
+        <AppThemeBinding Light="{StaticResource BackgroundColorLight}" Dark="{StaticResource BackgroundColorDark}" />
+    </ContentPage.Background>
+
+    <VerticalStackLayout VerticalOptions="Fill"
+                         HorizontalOptions="Fill"
+                        
+                         Spacing="20" Padding="20">
+
+        <!-- Large Image Covering Part of the Screen -->
+        <Image Source="loginp.png"
+               HorizontalOptions="Fill"
+               VerticalOptions="Start"
+               HeightRequest="300"
+                Margin="0,0,0,25"
+               Aspect="AspectFill" />
+
+        <!-- Welcome Text -->
+        <Label Text="Welcome!" 
+               FontSize="30" 
+               FontAttributes="Bold" 
+               TextColor="{AppThemeBinding Light={StaticResource TextPrimaryColorLight}, Dark={StaticResource TextPrimaryColorDark}}" 
+               HorizontalOptions="Start"
+                Margin="0,0,0,0"/>
+
+        <!-- Username Entry -->
+        <Frame CornerRadius="14"
+               BorderColor="{AppThemeBinding Light={StaticResource SurfaceColorLight}, Dark={StaticResource SurfaceColorDark}}"
+               BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundColorLight}, Dark={StaticResource BackgroundColorDark}}"
+               Padding="0"
+                
+               HorizontalOptions="Fill"
+               VerticalOptions="Center">
+            <Entry x:Name="UsernameEntry"
+                   Placeholder="Enter Username"
+                   BackgroundColor="Transparent"
+                   TextColor="{AppThemeBinding Light={StaticResource TextPrimaryColorLight}, Dark={StaticResource TextPrimaryColorDark}}"
+                   FontSize="17"
+                   HeightRequest="55"
+                   Margin="10,0,10,0"
+                   Visual="None" />
+        </Frame>
+
+        <!-- Password Entry -->
+        <Frame CornerRadius="14"
+               BorderColor="{AppThemeBinding Light={StaticResource SurfaceColorLight}, Dark={StaticResource SurfaceColorDark}}"
+               BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundColorLight}, Dark={StaticResource BackgroundColorDark}}"
+               Padding="0"
+               HorizontalOptions="Fill"
+               VerticalOptions="Center">
+            <Grid>
+                <Entry x:Name="PasswordEntry"
+                       Placeholder="Enter Password"
+                       BackgroundColor="Transparent"
+                       TextColor="{AppThemeBinding Light={StaticResource TextPrimaryColorLight}, Dark={StaticResource TextPrimaryColorDark}}"
+                       FontSize="17"
+                       HeightRequest="55"
+                       Margin="10,0,40,0"
+                       IsPassword="True"
+                       Visual="None" />
+
+                <!-- Eye Icon Button for toggling password visibility -->
+                <Button x:Name="TogglePasswordVisibilityButton"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        BackgroundColor="Transparent"
+                        WidthRequest="20"
+                        HeightRequest="20"
+                        Padding="0"
+                        Margin="0,0,15,0"
+                        Clicked="OnEyeIconClicked">
+                    <Button.ImageSource>
+                        <AppThemeBinding 
+                            Light="icons/eyes/eye_dark.png" 
+                            Dark="icons/eyes/eye_light.png" />
+                    </Button.ImageSource>
+                </Button>
+            </Grid>
+        </Frame>
+
+        <!-- Login Button at the bottom -->
+        <Button Text="Login" 
+
+                HorizontalOptions="Fill"
+                BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryColorLight}, Dark={StaticResource PrimaryColorDark}}"
+                TextColor="White" 
+                CornerRadius="14" 
+                FontSize="16" 
+                HeightRequest="55" 
+                Margin="0,150,0,10"
+                VerticalOptions="End"
+                Clicked="LoginClicked" />
+
+    </VerticalStackLayout>
+</ContentPage>

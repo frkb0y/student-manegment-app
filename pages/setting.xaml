@@ -1,0 +1,71 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="plz_fix.pages.setting"
+             xmlns:loc="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+             Title="{loc:Translate Settings}">
+
+    <ContentPage.Background>
+        <AppThemeBinding Light="{StaticResource BackgroundColorLight}" Dark="{StaticResource BackgroundColorDark}" />
+    </ContentPage.Background>
+
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="20">
+
+            <!-- Title -->
+            <Label Text="{loc:Translate Settings}" 
+                   FontSize="24" 
+                   FontAttributes="Bold" 
+                   TextColor="{AppThemeBinding Light={StaticResource TextPrimaryColorLight}, Dark={StaticResource TextPrimaryColorDark}}" 
+                   HorizontalOptions="Center" />
+
+            <!-- Dark Mode Setting -->
+            <HorizontalStackLayout Padding="10" Spacing="10">
+
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Start">
+                    <Label Text="{loc:Translate DarkMode}" 
+                           FontSize="18"
+                           TextColor="{AppThemeBinding Light={StaticResource TextPrimaryColorLight}, Dark={StaticResource TextPrimaryColorDark}}" />
+                </VerticalStackLayout>
+
+                <!-- Move the Switch to the end of the screen -->
+                <VerticalStackLayout HorizontalOptions="End">
+                    <Switch x:Name="ThemeSwitch"
+                            HorizontalOptions="End"
+                            Toggled="OnThemeSwitchToggled" />
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+
+            <!-- Language Selection -->
+            <HorizontalStackLayout Padding="10" Spacing="10">
+                <Label Text="{loc:Translate Language}" 
+                       VerticalOptions="Center"
+                       FontSize="18"
+                       TextColor="{AppThemeBinding Light={StaticResource TextPrimaryColorLight}, Dark={StaticResource TextPrimaryColorDark}}" />
+                <Frame CornerRadius="10"
+                       BorderColor="{AppThemeBinding Light={StaticResource BorderColorLight}, Dark={StaticResource BorderColorDark}}"
+                       BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryColorLight}, Dark={StaticResource PrimaryColorDark}}"
+                       Padding="5"
+                       HasShadow="False"
+                       HeightRequest="50"
+                       HorizontalOptions="Start">
+                    <Picker x:Name="LanguagePicker"
+                            Title="{loc:Translate Language}"
+                            SelectedIndexChanged="OnLanguagePickerSelectedIndexChanged"
+                            BackgroundColor="Transparent"
+                            TextColor="{AppThemeBinding Light={StaticResource TextPrimaryColorLight}, Dark={StaticResource TextPrimaryColorDark}}"
+                            FontSize="16">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>English</x:String>
+                                <x:String>Español</x:String>
+                                <x:String>Français</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </Frame>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="plz_fix.pages.dash.profile"
+             Title="Profile"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20">
+
+            <!-- Profile Section -->
+            <VerticalStackLayout HorizontalOptions="Center" Spacing="5" Margin="0,10,0,30">
+                <Frame WidthRequest="100" HeightRequest="100" CornerRadius="50" BackgroundColor="#E0ECFF"
+                       HorizontalOptions="Center">
+                    <Image Source="profile_placeholder.png" WidthRequest="80" HeightRequest="80"/>
+                </Frame>
+                <Label Text="Lucas Scott" FontSize="18" FontAttributes="Bold" TextColor="Black"
+                       HorizontalOptions="Center"/>
+                <Label Text="@lucasscott3" FontSize="14" TextColor="Gray"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <!-- Account & Security Section -->
+            <Label Text="Account &amp; Security" FontSize="20" FontAttributes="Bold" TextColor="Black" Margin="10"/>
+            <Button Text="Settings" FontSize="17" BackgroundColor="Yellow" TextColor="Black" HorizontalOptions="StartAndExpand" Margin="10" Clicked="OnSettingsButtonClicked"/>
+            <Button Text="Manage Devices" FontSize="17" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="StartAndExpand" Margin="10"/>
+
+            <!-- Logout Button -->
+            <Button Text="Logout" BackgroundColor="Transparent" TextColor="Red" HorizontalOptions="StartAndExpand" Margin="10"/>
+
+            <!-- Notification Section -->
+            <Label Text="Notification" FontSize="20" FontAttributes="Bold" TextColor="Black" Margin="10"/>
+            <Button Text="Email Notifications" FontSize="17" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="StartAndExpand" Margin="10"/>
+            <Button Text="Push Notifications" FontSize="17" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="StartAndExpand" Margin="10"/>
+
+            <!-- Privacy & Data Section -->
+            <Label Text="Privacy &amp; Data" FontSize="20" FontAttributes="Bold" TextColor="Black" Margin="10"/>
+            <Button Text="Manage Privacy Settings" FontSize="17" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="StartAndExpand" Margin="10"/>
+            <Button Text="Data Usage" FontSize="17" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="StartAndExpand" Margin="10"/>
+
+            <!-- Help & About Section -->
+            <Label Text="Help &amp; About" FontSize="20" FontAttributes="Bold" TextColor="Black" Margin="10"/>
+            <Button Text="Help Center" FontSize="17" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="StartAndExpand" Margin="10"/>
+            <Button Text="About Us" FontSize="17" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="StartAndExpand" Margin="10"/>
+
+            <!-- Delete Account -->
+            <Button Text="Delete My Account" BackgroundColor="Transparent" TextColor="Red" HorizontalOptions="StartAndExpand" Margin="0,20,0,10"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

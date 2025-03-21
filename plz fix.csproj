@@ -1,0 +1,148 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
+
+		<OutputType>Exe</OutputType>
+		<RootNamespace>plz_fix</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<!-- Display name -->
+		<ApplicationTitle>plz fix</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.companyname.plzfix</ApplicationId>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<WindowsPackageType>None</WindowsPackageType>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<!-- Exclude ASP.NET Core project for Android/iOS/MacCatalyst -->
+	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-windows10.0.19041.0'">
+		<ProjectReference Include="..\XAF.Blazor.Server\XAF.Blazor.Server.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Resources\Images\icons\dashicon\chat.png" />
+	  <None Remove="Resources\Images\icons\dashicon\dashbord.png" />
+	  <None Remove="Resources\Images\icons\dashicon\profile.png" />
+	  <None Remove="Resources\Images\icons\dashicon\task.png" />
+	  <None Remove="Resources\Images\icons\eyes\eye_dark.png" />
+	  <None Remove="Resources\Images\icons\eyes\eye_dark_closed.png" />
+	  <None Remove="Resources\Images\icons\eyes\eye_light.png" />
+	  <None Remove="Resources\Images\icons\eyes\eye_light_closed.png" />
+	  <None Remove="Resources\Images\icons\facebook.png" />
+	  <None Remove="Resources\Images\icons\gmail.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\XAF.Module\XAF.Module.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="DevExpress.ExpressApp.Security" Version="24.2.3" />
+		<PackageReference Include="DevExpress.Persistent.BaseImpl.EF6" Version="24.2.3" />
+		<PackageReference Include="LocalizationResourceManager.Maui" Version="1.2.2" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.2" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.40" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.2" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.40" />
+		<PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="9.0.2" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+		<PackageReference Include="ZXing.Net.Maui.Controls" Version="0.4.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Resources\Lang\Resource.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resource.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Resources\Lang\Resource.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resource.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<MauiXaml Update="pages\dash\chat.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\dash\classes.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\dash\index.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\dash\MainTabbedPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\dash\profile.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\dash\task.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\login\loginpage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\login\qrpage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\login\start.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\setting.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\Images\icons\dashicon\chat.png" />
+	  <MauiImage Include="Resources\Images\icons\dashicon\classes.png" />
+	  <MauiImage Include="Resources\Images\icons\dashicon\dashbord.png" />
+	  <MauiImage Include="Resources\Images\icons\dashicon\profile.png" />
+	  <MauiImage Include="Resources\Images\icons\dashicon\task.png" />
+	  <MauiImage Include="Resources\Images\icons\eyes\eye_dark.png" />
+	  <MauiImage Include="Resources\Images\icons\eyes\eye_dark_closed.png" />
+	  <MauiImage Include="Resources\Images\icons\eyes\eye_light.png" />
+	  <MauiImage Include="Resources\Images\icons\eyes\eye_light_closed.png" />
+	  <MauiImage Include="Resources\Images\icons\facebook.png" />
+	  <MauiImage Include="Resources\Images\icons\gmail.png" />
+	</ItemGroup>
+
+</Project>

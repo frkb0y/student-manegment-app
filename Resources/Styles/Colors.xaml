@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Light Mode Colors -->
+    <Color x:Key="PrimaryColorLight">#1A73E8</Color>
+    <Color x:Key="SecondaryColorLight">#8AB4F8</Color>
+    <Color x:Key="BackgroundColorLight">#FFFFFF</Color>
+    <Color x:Key="SurfaceColorLight">#F5F5F5</Color>
+    <Color x:Key="TextPrimaryColorLight">#202124</Color>
+    <Color x:Key="TextSecondaryColorLight">#5F6368</Color>
+    <Color x:Key="AccentColorLight">#4285F4</Color>
+    <Color x:Key="ErrorColorLight">#EA4335</Color>
+    <Color x:Key="SuccessColorLight">#34A853</Color>
+    <Color x:Key="WarningColorLight">#FBBC05</Color>
+
+    <!-- Application Colors -->
+    <Color x:Key="Primary">#512BD4</Color>
+    <Color x:Key="Secondary">#DFD8F7</Color>
+    <Color x:Key="Tertiary">#2B0B98</Color>
+    <Color x:Key="Background">#FFFFFF</Color>
+    <Color x:Key="TextPrimary">#000000</Color>
+    <Color x:Key="TextSecondary">#7F7F7F</Color>
+    <Color x:Key="BorderColorLight">#E0E0E0</Color>
+    <Color x:Key="BorderColorDark">#A0A0A0</Color>
+    
+    <!-- Dark Mode Colors (Updated) -->
+    <Color x:Key="PrimaryColorDark">#6200EE</Color>
+    <!-- Lighter, more vibrant purple -->
+    <Color x:Key="SecondaryColorDark">#03DAC5</Color>
+    <!-- Teal accent color -->
+    <Color x:Key="BackgroundColorDark">#121212</Color>
+    <!-- Dark background -->
+    <Color x:Key="SurfaceColorDark">#1F1B24</Color>
+    <!-- Slightly lighter dark surface -->
+    <Color x:Key="TextPrimaryColorDark">#E0E0E0</Color>
+    <!-- Soft light gray text -->
+    <Color x:Key="TextSecondaryColorDark">#A6A6A6</Color>
+    <!-- Lighter gray for secondary text -->
+    <Color x:Key="AccentColorDark">#BB86FC</Color>
+    <!-- Lighter purple for accent -->
+    <Color x:Key="ErrorColorDark">#CF6679</Color>
+    <!-- Softened red for error messages -->
+    <Color x:Key="SuccessColorDark">#03DAC5</Color>
+    <!-- Teal for success message -->
+    <Color x:Key="WarningColorDark">#FFB300</Color>
+    <!-- Bright amber for warning -->
+</ResourceDictionary>
