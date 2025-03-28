@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="plz_fix.pages.dash.pay"
+             Title="Subscription"
+             BackgroundColor="#F5F5F5">
+
+    <Grid RowDefinitions="*,Auto">
+        <!-- Scrollable Content -->
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="20" Spacing="20">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Choose your subscription plan" 
+                           FontSize="24" 
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+
+                    <Label Text="And get a 7-day free trial" 
+                           FontSize="16" 
+                           TextColor="Gray"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="15">
+                    <!-- Yearly Plan -->
+                    <Frame BackgroundColor="White"
+                           CornerRadius="15"
+                           Padding="15"
+                           HasShadow="True">
+                        <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto">
+                            <RadioButton Grid.Row="0" Grid.Column="0"
+                                        Grid.RowSpan="2"
+                                        VerticalOptions="Center"
+                                        Margin="0,0,10,0"/>
+
+                            <Label Text="Yearly" 
+                                   Grid.Row="0" Grid.Column="1"
+                                   FontSize="18" 
+                                   FontAttributes="Bold"/>
+
+                            <Label Text="100 TND" 
+                                   Grid.Row="0" Grid.Column="2"
+                                   FontSize="18" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="End"/>
+
+                            <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="5">
+                                <Frame BackgroundColor="#FFEDD5"
+                                       CornerRadius="10"
+                                       Padding="5,2">
+                                    <Label Text="40% discount" 
+                                           FontSize="12"/>
+                                </Frame>
+                                <Label Text="every year" 
+                                       FontSize="14"
+                                       TextColor="Gray"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Monthly Plan -->
+                    <Frame BackgroundColor="White"
+                           CornerRadius="15"
+                           Padding="15"
+                           HasShadow="True">
+                        <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto">
+                            <RadioButton Grid.Row="0" Grid.Column="0"
+                                        Grid.RowSpan="2"
+                                        VerticalOptions="Center"
+                                        Margin="0,0,10,0"/>
+
+                            <Label Text="Monthly" 
+                                   Grid.Row="0" Grid.Column="1"
+                                   FontSize="18" 
+                                   FontAttributes="Bold"/>
+
+                            <Label Text="12 TND" 
+                                   Grid.Row="0" Grid.Column="2"
+                                   FontSize="18" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="End"/>
+
+                            <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="5">
+                                <Frame BackgroundColor="#FFEDD5"
+                                       CornerRadius="10"
+                                       Padding="5,2">
+                                    <Label Text="45% discount" 
+                                           FontSize="12"/>
+                                </Frame>
+                                <Label Text="every month" 
+                                       FontSize="14"
+                                       TextColor="Gray"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Weekly Plan -->
+                    <Frame BackgroundColor="White"
+                           CornerRadius="15"
+                           Padding="15"
+                           HasShadow="True">
+                        <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto">
+                            <RadioButton Grid.Row="0" Grid.Column="0"
+                                        Grid.RowSpan="2"
+                                        VerticalOptions="Center"
+                                        Margin="0,0,10,0"/>
+
+                            <Label Text="Weekly" 
+                                   Grid.Row="0" Grid.Column="1"
+                                   FontSize="18" 
+                                   FontAttributes="Bold"/>
+
+                            <Label Text="5 TND" 
+                                   Grid.Row="0" Grid.Column="2"
+                                   FontSize="18" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="End"/>
+
+                            <Label Text="every week" 
+                                   Grid.Row="1" Grid.Column="1"
+                                   FontSize="14"
+                                   TextColor="Gray"/>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="You'll get:" 
+                           FontSize="16"
+                           FontAttributes="Bold"/>
+
+                    <Label Text="- Unlimited access" 
+                           FontSize="14"/>
+
+                    <Label Text="- easy access" 
+                           FontSize="14"/>
+
+                    <Label Text="- Type all your devices" 
+                           FontSize="14"/>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Subscribe Button at Bottom -->
+        <Button Grid.Row="1"
+                Text="Subscribe"
+                BackgroundColor="#2563EB"
+                TextColor="White"
+                CornerRadius="10"
+                FontSize="16"
+                FontAttributes="Bold"
+                HeightRequest="50"
+                Margin="20"
+                Clicked="OnSubscribeClicked"/>
+    </Grid>
+</ContentPage>

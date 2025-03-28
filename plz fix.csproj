@@ -53,6 +53,15 @@
 		<ProjectReference Include="..\XAF.Blazor.Server\XAF.Blazor.Server.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <None Remove="Resources\Images\icons\classicon\art.png" />
+	  <None Remove="Resources\Images\icons\classicon\book.png" />
+	  <None Remove="Resources\Images\icons\classicon\chart.png" />
+	  <None Remove="Resources\Images\icons\classicon\graph.png" />
+	  <None Remove="Resources\Images\icons\classicon\inject.png" />
+	  <None Remove="Resources\Images\icons\classicon\math.png" />
+	  <None Remove="Resources\Images\icons\classicon\medic.png" />
+	  <None Remove="Resources\Images\icons\classicon\sc.png" />
+	  <None Remove="Resources\Images\icons\classicon\screan.png" />
 	  <None Remove="Resources\Images\icons\dashicon\chat.png" />
 	  <None Remove="Resources\Images\icons\dashicon\dashbord.png" />
 	  <None Remove="Resources\Images\icons\dashicon\profile.png" />
@@ -111,6 +120,9 @@
 		<MauiXaml Update="pages\dash\MainTabbedPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="pages\dash\pay.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="pages\dash\profile.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -132,6 +144,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Include="Resources\Images\icons\classicon\art.png" />
+	  <MauiImage Include="Resources\Images\icons\classicon\book.png" />
+	  <MauiImage Include="Resources\Images\icons\classicon\chart.png" />
+	  <MauiImage Include="Resources\Images\icons\classicon\graph.png" />
+	  <MauiImage Include="Resources\Images\icons\classicon\inject.png" />
+	  <MauiImage Include="Resources\Images\icons\classicon\math.png" />
+	  <MauiImage Include="Resources\Images\icons\classicon\medic.png" />
+	  <MauiImage Include="Resources\Images\icons\classicon\sc.png" />
+	  <MauiImage Include="Resources\Images\icons\classicon\screan.png" />
 	  <MauiImage Include="Resources\Images\icons\dashicon\chat.png" />
 	  <MauiImage Include="Resources\Images\icons\dashicon\classes.png" />
 	  <MauiImage Include="Resources\Images\icons\dashicon\dashbord.png" />
