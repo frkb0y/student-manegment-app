@@ -88,7 +88,7 @@ namespace plz_fix.pages.login
 
                         if (count > 0)
                         {
-                            await DisplayAlert("Success", "Login Successful!", "OK");
+                            await Navigation.PushAsync(new pages.dash.MainTabbedPage());
                         }
                         else
                         {

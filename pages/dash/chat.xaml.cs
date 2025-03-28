@@ -5,7 +5,8 @@ public partial class chat : ContentPage
 	public chat()
 	{
 		InitializeComponent();
-	}
+        BindingContext = new ChatViewModel();
+    }
     protected override void OnAppearing()
     {
         base.OnAppearing();

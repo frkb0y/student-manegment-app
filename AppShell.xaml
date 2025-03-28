@@ -9,4 +9,5 @@
 
     <!-- Define the ShellContent for login page -->
     <ShellContent ContentTemplate="{DataTemplate local:loginpage}" Route="loginpage" />
+    
 </Shell>
