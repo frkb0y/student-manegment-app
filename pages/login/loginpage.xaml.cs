@@ -76,7 +76,7 @@ namespace plz_fix.pages.login
                     await sqlConnection.OpenAsync();
 
                     // Query to match the UserName and Password in the UserLogin table
-                    string query = "SELECT COUNT(*) FROM XAF.dbo.UserLogin WHERE UserName=@Username AND Password=@Password";
+                    string query = "SELECT COUNT(*) FROM XAF.dbo.UserApp WHERE Username=@Username AND Password=@Password";
 
                     using (SqlCommand cmd = new SqlCommand(query, sqlConnection))
                     {
@@ -88,7 +88,7 @@ namespace plz_fix.pages.login
 
                         if (count > 0)
                         {
-                            await Navigation.PushAsync(new pages.dash.MainTabbedPage());
+                            await Navigation.PushAsync(new pages.dash.MainTabbedPage(username));
                         }
                         else
                         {

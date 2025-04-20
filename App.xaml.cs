@@ -1,5 +1,6 @@
 ﻿using LocalizationResourceManager.Maui;
 using Microsoft.Maui.Controls;
+using Plugin.Firebase.CloudMessaging;
 
 namespace plz_fix
 {
@@ -12,10 +13,11 @@ namespace plz_fix
             _localizationResourceManager = localizationResourceManager;
             InitializeComponent();
 
-            MainPage = new NavigationPage(new pages.dash.MainTabbedPage());
+            MainPage = new NavigationPage(new pages.login.start(localizationResourceManager));
 
         }
 
       
     }
+
 }

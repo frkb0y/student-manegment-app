@@ -5,6 +5,11 @@ using plz_fix;
 using plz_fix.Resources;
 using ZXing.Net.Maui;
 using ZXing.Net.Maui.Controls;
+using Syncfusion.Maui.Core;
+using Syncfusion.Maui.Scheduler;
+using Syncfusion.Maui.Core.Hosting;
+using Plugin.LocalNotification;
+
 
 public static class MauiProgram
 {
@@ -14,6 +19,8 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseBarcodeReader()
+            .UseLocalNotification()
+            .ConfigureSyncfusionCore()
             .UseLocalizationResourceManager(settings =>
             {
                 settings.RestoreLatestCulture(true);
@@ -29,5 +36,7 @@ public static class MauiProgram
         builder.Services.AddTransient<plz_fix.pages.login.start>();
         builder.Services.AddTransient<plz_fix.pages.login.qrpage>();
         return builder.Build();
+
+
     }
 }

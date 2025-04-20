@@ -1,12 +1,80 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:plz_fix.Resources.helpers"
              x:Class="plz_fix.pages.dash.task"
-             Title="task">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Task Tracker">
+    <ScrollView>
+        <VerticalStackLayout Spacing="5" Padding="20">
+
+            <!-- Header with Calendar button, "To Do" title, and + button -->
+            <Grid Padding="10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Button to navigate to Calendar -->
+                <Button Text="{x:Static resources:iconshelp.CalendarEmoji}"
+                        FontSize="16"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White"
+                        Clicked="OnCalendarButtonClicked"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        Grid.Column="0"/>
+
+                <!-- Centered "To Do" Text -->
+                <Label Text="To Do" 
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource Primary}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       Grid.Column="1"/>
+
+                <!-- Button to add new task -->
+                <Button Text="+" 
+                        FontSize="24"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White"
+                        Clicked="OnAddTaskClicked"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        Grid.Column="2"/>
+            </Grid>
+
+            <!-- Task List -->
+            <CollectionView x:Name="TaskListView">
+                <CollectionView.EmptyView>
+                    <Label Text="No tasks available."
+                           HorizontalOptions="Center"
+                           VerticalOptions="CenterAndExpand"
+                           TextColor="Gray"/>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" CornerRadius="10" HasShadow="True" Margin="10">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="{Binding WorkName}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="Black"/>
+                                <Label Text="{Binding StartDate, StringFormat='{0:MMM dd, HH:mm}'}"
+                                       FontSize="14"
+                                       TextColor="Gray"/>
+                                <Label Text="{Binding WorkDescription}"
+                                       FontSize="14"
+                                       TextColor="Black"/>
+                            </VerticalStackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnTaskTapped" CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks>net9.0-android;<!--net9.0-ios--></TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
 
 		<OutputType>Exe</OutputType>
@@ -75,19 +75,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\XAF.Module\XAF.Module.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="DevExpress.ExpressApp.Security" Version="24.2.3" />
 		<PackageReference Include="DevExpress.Persistent.BaseImpl.EF6" Version="24.2.3" />
+		<PackageReference Include="FirebaseAdmin" Version="3.1.0" />
 		<PackageReference Include="LocalizationResourceManager.Maui" Version="1.2.2" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.2" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.40" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.50" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.2" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.40" />
 		<PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="9.0.2" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Plugin.Firebase" Version="3.1.4" />
+		<PackageReference Include="Plugin.Firebase.CloudMessaging" Version="3.1.2" />
+		<PackageReference Include="Plugin.LocalNotification" Version="11.1.4" />
+		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="29.1.37" />
 		<PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
 		<PackageReference Include="ZXing.Net.Maui.Controls" Version="0.4.0" />
 	</ItemGroup>
@@ -108,6 +109,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<MauiXaml Update="pages\dash\calendar.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="pages\dash\chat.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -126,7 +130,13 @@
 		<MauiXaml Update="pages\dash\profile.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="pages\dash\profilepages\note.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="pages\dash\task.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\dash\taskedit.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="pages\login\loginpage.xaml">
@@ -164,6 +174,10 @@
 	  <MauiImage Include="Resources\Images\icons\eyes\eye_light_closed.png" />
 	  <MauiImage Include="Resources\Images\icons\facebook.png" />
 	  <MauiImage Include="Resources\Images\icons\gmail.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\XAF.Module\XAF.Module.csproj" />
 	</ItemGroup>
 
 </Project>

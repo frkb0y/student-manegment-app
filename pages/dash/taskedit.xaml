@@ -1,0 +1,22 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="plz_fix.pages.dash.TaskEditPage"
+             Title="Edit Task">
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="15">
+            <Label Text="Work Name"/>
+            <Entry x:Name="WorkNameEntry" Placeholder="Enter task name"/>
+
+            <Label Text="Description"/>
+            <Editor x:Name="DescriptionEditor" HeightRequest="100" Placeholder="Enter task description"/>
+
+            <Label Text="Start Date"/>
+            <DatePicker x:Name="StartDatePicker"/>
+
+            <Label Text="Start Time"/>
+            <TimePicker x:Name="StartTimePicker"/>
+
+            <Button Text="Save" Clicked="OnSaveClicked"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -8,6 +8,7 @@ namespace plz_fix.Resources.helpers
 {
     internal class iconshelp
     {
+        public const string CalendarEmoji = "\uD83D\uDCC5"; // Unicode for Calendar emoji
         public const string Icon1 = "\u0030";
         public const string Icon2 = "\u0031";
         public const string Icon3 = "\u0032";

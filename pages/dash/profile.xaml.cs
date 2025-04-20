@@ -1,24 +1,33 @@
 using LocalizationResourceManager.Maui;
 
-namespace plz_fix.pages.dash;
-
-public partial class profile : ContentPage
+namespace plz_fix.pages.dash
 {
-    private ILocalizationResourceManager _localizationResourceManager;
-
-    public profile()
-	{
-		InitializeComponent();
-	}
-    protected override void OnAppearing()
+    public partial class profile : ContentPage
     {
-        base.OnAppearing();
-        Shell.SetNavBarIsVisible(this, false);
-        NavigationPage.SetHasNavigationBar(this, false);
-    }
+        private ILocalizationResourceManager _localizationResourceManager;
+        private string _username;
 
-    private async void OnSettingsButtonClicked(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new plz_fix.pages.setting(_localizationResourceManager));
+        public profile(string username)
+        {
+            InitializeComponent();
+            _username = username;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            Shell.SetNavBarIsVisible(this, false);
+            NavigationPage.SetHasNavigationBar(this, false);
+        }
+
+        private async void OnSettingsButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new plz_fix.pages.setting(_localizationResourceManager));
+        }
+
+        private async void noteClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new profilepages.note(_username)); // <-- Pass username here
+        }
     }
 }
