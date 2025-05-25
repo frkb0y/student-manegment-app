@@ -90,6 +90,7 @@
 		<PackageReference Include="Plugin.LocalNotification" Version="11.1.4" />
 		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="29.1.37" />
 		<PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+		<PackageReference Include="System.Reactive" Version="6.0.1" />
 		<PackageReference Include="ZXing.Net.Maui.Controls" Version="0.4.0" />
 	</ItemGroup>
 
@@ -109,7 +110,40 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<MauiXaml Update="pages\dash\calendar.xaml">
+		<MauiXaml Update="pages\controllerp\adminp.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\controllerp\function\ManageAbsencesPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\controllerp\function\ManageAccountsPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\controllerp\function\ManageEventsPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\controllerp\function\ManageNotesPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\controllerp\function\ManageProfilesPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\controllerp\function\ManageRolesPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\controllerp\function\ManageSubjectsPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\controllerp\function\ManageToDoPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\controllerp\teatcherp.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\dash\AttendancePage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\dash\toolspage\calendar.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="pages\dash\chat.xaml">
@@ -124,7 +158,7 @@
 		<MauiXaml Update="pages\dash\MainTabbedPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="pages\dash\pay.xaml">
+		<MauiXaml Update="pages\dash\toolspage\pay.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="pages\dash\profile.xaml">
@@ -137,6 +171,12 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="pages\dash\taskedit.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\dash\toolspage\PopupImagePage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="pages\dash\toolspage\schedual.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="pages\login\loginpage.xaml">
@@ -178,6 +218,10 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\XAF.Module\XAF.Module.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="pages\dash\classess\" />
 	</ItemGroup>
 
 </Project>

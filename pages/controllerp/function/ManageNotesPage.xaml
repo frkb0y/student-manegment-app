@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="plz_fix.pages.controllerp.function.ManageNotesPage"
+             Title="Manage Notes">
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="25">
+
+            <!-- Styled Header -->
+            <Frame BackgroundColor="#2C3E50" CornerRadius="15" Padding="20" Margin="0,0,0,20" HasShadow="True">
+                <Label 
+                    Text="Manage Notes" 
+                    FontSize="24" 
+                    FontAttributes="Bold" 
+                    HorizontalOptions="Center" 
+                    TextColor="White" />
+            </Frame>
+
+            <!-- Student Selector -->
+            <Label Text="Select Student" FontSize="18" FontAttributes="Bold" TextColor="#34495E"/>
+            <Frame BackgroundColor="#ECF0F1" CornerRadius="15" Padding="10" HasShadow="True">
+                <Picker x:Name="StudentPicker" Title="Choose a student" FontSize="16" />
+            </Frame>
+
+            <!-- Subject Selector -->
+            <Label Text="Select Subject" FontSize="18" FontAttributes="Bold" TextColor="#34495E"/>
+            <Frame BackgroundColor="#ECF0F1" CornerRadius="15" Padding="10" HasShadow="True">
+                <Picker x:Name="SubjectPicker" Title="Choose a subject" FontSize="16" />
+            </Frame>
+
+            <!-- Score Input -->
+            <Label Text="Score" FontSize="18" FontAttributes="Bold" TextColor="#34495E"/>
+            <Frame BackgroundColor="#ECF0F1" CornerRadius="15" Padding="10" HasShadow="True">
+                <Entry x:Name="ScoreEntry" Keyboard="Numeric" Placeholder="Enter score (e.g., 15)" FontSize="16" />
+            </Frame>
+
+            <!-- Comment Input -->
+            <Label Text="Additional Comment" FontSize="18" FontAttributes="Bold" TextColor="#34495E"/>
+            <Frame BackgroundColor="#ECF0F1" CornerRadius="15" Padding="10" HasShadow="True">
+                <Editor x:Name="CommentEditor" HeightRequest="120" Placeholder="Add any comments (optional)" FontSize="16" />
+            </Frame>
+
+            <!-- Save Button -->
+            <Frame CornerRadius="15" HasShadow="True" Padding="0">
+                <Button 
+                    Text="Save Note" 
+                    Clicked="OnSaveClicked" 
+                    BackgroundColor="#3498DB" 
+                    TextColor="White" 
+                    FontAttributes="Bold" 
+                    HeightRequest="55" 
+                    CornerRadius="15" />
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

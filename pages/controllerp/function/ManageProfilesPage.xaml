@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="plz_fix.pages.controllerp.function.ManageProfilesPage"
+             Title="Manage Profiles">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="Manage Profiles" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <!-- Add/Edit Profile Section -->
+            <Frame Padding="10" CornerRadius="10" BackgroundColor="#ECF0F1">
+                <VerticalStackLayout Spacing="10">
+                    <Entry x:Name="FirstNameEntry" Placeholder="First Name" />
+                    <Entry x:Name="LastNameEntry" Placeholder="Last Name" />
+                    <DatePicker x:Name="BirthDatePicker" IsVisible="False"/>
+                    <Entry x:Name="AddressEntry" Placeholder="Address" />
+                    <Entry x:Name="ContactInfoEntry" Placeholder="Contact Info" />
+                    <Entry x:Name="SubjectExpertiseEntry" Placeholder="Subject Expertise" />
+                    <HorizontalStackLayout Spacing="10">
+                        <Button x:Name="SaveButton" Text="Save" Clicked="OnSaveProfileClicked" BackgroundColor="#27ae60" TextColor="White"/>
+                        <Button x:Name="ClearButton" Text="Clear" Clicked="OnClearClicked" BackgroundColor="#95a5a6" TextColor="White"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Profiles List -->
+            <CollectionView x:Name="ProfilesCollectionView" SelectionMode="Single" ItemsSource="{Binding ProfilesList}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" CornerRadius="10" Margin="0,5" BackgroundColor="#F8F9F9">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding FirstLastName}" FontSize="18" FontAttributes="Bold"/>
+                                <Label Text="{Binding BirthDateString}" FontSize="14" TextColor="#888"/>
+                                <Label Text="{Binding Address}" FontSize="14" />
+                                <Label Text="{Binding ContactInfo}" FontSize="14" />
+                                <Label Text="{Binding SubjectExpertise}" FontSize="14" />
+
+                                <HorizontalStackLayout Spacing="10">
+                                    <Button Text="Edit" Clicked="OnEditProfileClicked" CommandParameter="{Binding .}" BackgroundColor="#2980b9" TextColor="White"/>
+                                    <Button Text="Delete" Clicked="OnDeleteProfileClicked" CommandParameter="{Binding .}" BackgroundColor="#c0392b" TextColor="White"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

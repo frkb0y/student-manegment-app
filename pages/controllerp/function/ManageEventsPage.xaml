@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="plz_fix.pages.controllerp.function.ManageEventsPage"
+             Title="Manage Events">
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="25">
+
+            <!-- Styled Header -->
+            <Frame BackgroundColor="#34495E" CornerRadius="15" Padding="20" HasShadow="True">
+                <Label 
+                    Text="Manage Events for Students" 
+                    FontSize="26" 
+                    FontAttributes="Bold" 
+                    HorizontalOptions="Center" 
+                    TextColor="White" />
+            </Frame>
+
+            <!-- Student Selection -->
+            <Label Text="Select Students" FontSize="20" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <CollectionView x:Name="StudentsCollectionView" SelectionMode="Multiple" VerticalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                            <Label Text="{Binding Name}" FontSize="18" TextColor="#34495E" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Event Details -->
+            <Label Text="Event Name" FontSize="20" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <Frame BackgroundColor="#ECF0F1" CornerRadius="15" Padding="10" HasShadow="True">
+                <Entry x:Name="EventNameEntry" Placeholder="Enter event name" FontSize="18" />
+            </Frame>
+
+            <Label Text="Event Description" FontSize="20" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <Frame BackgroundColor="#ECF0F1" CornerRadius="15" Padding="10" HasShadow="True">
+                <Editor x:Name="EventDescriptionEditor" HeightRequest="100" Placeholder="Enter event description" FontSize="18" />
+            </Frame>
+
+            <Label Text="Start Date" FontSize="20" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <DatePicker x:Name="StartDatePicker" />
+
+            <Label Text="End Date" FontSize="20" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <DatePicker x:Name="EndDatePicker" />
+
+            <!-- Save Button -->
+            <Button 
+                Text="Assign Event" 
+                Clicked="OnAssignEventClicked" 
+                BackgroundColor="#1ABC9C" 
+                TextColor="White" 
+                FontAttributes="Bold" 
+                HeightRequest="50" 
+                CornerRadius="15" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

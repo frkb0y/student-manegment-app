@@ -4,45 +4,44 @@
              x:Class="plz_fix.pages.dash.task"
              Title="Task Tracker">
     <ScrollView>
-        <VerticalStackLayout Spacing="5" Padding="20">
+        <VerticalStackLayout Spacing="10" Padding="20">
 
-            <!-- Header with Calendar button, "To Do" title, and + button -->
-            <Grid Padding="10,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+            <!-- Title -->
+            <Label Text="To Do"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource Primary}"
+                   HorizontalOptions="Center"
+                   Margin="0,10"/>
 
-                <!-- Button to navigate to Calendar -->
-                <Button Text="{x:Static resources:iconshelp.CalendarEmoji}"
-                        FontSize="16"
-                        BackgroundColor="{StaticResource Primary}"
-                        TextColor="White"
-                        Clicked="OnCalendarButtonClicked"
-                        HorizontalOptions="Start"
-                        VerticalOptions="Center"
-                        Grid.Column="0"/>
-
-                <!-- Centered "To Do" Text -->
-                <Label Text="To Do" 
-                       FontSize="24"
-                       FontAttributes="Bold"
-                       TextColor="{StaticResource Primary}"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Center"
-                       Grid.Column="1"/>
-
-                <!-- Button to add new task -->
-                <Button Text="+" 
-                        FontSize="24"
-                        BackgroundColor="{StaticResource Primary}"
-                        TextColor="White"
-                        Clicked="OnAddTaskClicked"
-                        HorizontalOptions="End"
-                        VerticalOptions="Center"
-                        Grid.Column="2"/>
-            </Grid>
+            <!-- Add New Task Card -->
+            <Frame BackgroundColor="#E0F2F1"
+                   Padding="15"
+                   CornerRadius="15"
+                   HasShadow="True"
+                   Margin="0,0,0,10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Add New Task"
+                           FontSize="18"
+                           VerticalOptions="Center"
+                           TextColor="Black"/>
+                    <Button Text="+"
+                            FontSize="28"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="White"
+                            Clicked="OnAddTaskClicked"
+                            WidthRequest="45"
+                            HeightRequest="45"
+                            CornerRadius="22"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center"
+                            Grid.Column="1"/>
+                </Grid>
+            </Frame>
 
             <!-- Task List -->
             <CollectionView x:Name="TaskListView">
@@ -54,21 +53,41 @@
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="10" CornerRadius="10" HasShadow="True" Margin="10">
-                            <VerticalStackLayout Spacing="5">
-                                <Label Text="{Binding WorkName}"
-                                       FontSize="16"
-                                       FontAttributes="Bold"
-                                       TextColor="Black"/>
-                                <Label Text="{Binding StartDate, StringFormat='{0:MMM dd, HH:mm}'}"
-                                       FontSize="14"
-                                       TextColor="Gray"/>
+                        <Frame BackgroundColor="White"
+                               Padding="20"
+                               CornerRadius="15"
+                               HasShadow="True"
+                               Margin="10,5">
+                            <VerticalStackLayout>
+                                <Grid ColumnDefinitions="*, Auto">
+                                    <Label Text="{Binding WorkName}"
+                                           FontSize="20"
+                                           FontAttributes="Bold"
+                                           Grid.Column="0"
+                                           VerticalOptions="Center"/>
+                                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                        <Frame Padding="6,3"
+                                               CornerRadius="12"
+                                               BackgroundColor="#B0D6FF">
+                                            <Label Text="{Binding StartDate, StringFormat='{0:MMM.dd HH:mm}'}"
+                                                   FontSize="14"
+                                                   TextColor="Black"/>
+                                        </Frame>
+                                        <Label Text="{Binding CreatedByName, StringFormat='from {0}'}"
+                                               FontSize="12"
+                                               TextColor="Gray"
+                                               HorizontalOptions="Center"/>
+                                    </VerticalStackLayout>
+                                </Grid>
                                 <Label Text="{Binding WorkDescription}"
-                                       FontSize="14"
-                                       TextColor="Black"/>
+                                       FontSize="16"
+                                       TextColor="Gray"
+                                       LineBreakMode="TailTruncation"
+                                       MaxLines="3"/>
                             </VerticalStackLayout>
                             <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnTaskTapped" CommandParameter="{Binding .}" />
+                                <TapGestureRecognizer Tapped="OnTaskTapped"
+                                                      CommandParameter="{Binding .}" />
                             </Frame.GestureRecognizers>
                         </Frame>
                     </DataTemplate>

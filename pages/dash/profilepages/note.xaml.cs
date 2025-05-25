@@ -1,14 +1,16 @@
-using Microsoft.Maui.Controls;
+﻿using Microsoft.Maui.Controls;
 using Microsoft.Data.SqlClient;
 using Plugin.LocalNotification;
 using System.Collections.ObjectModel;
+using System.Data;
+using System.Linq;
 
 namespace plz_fix.pages.dash.profilepages
 {
     public partial class note : ContentPage
     {
         private string _username;
-        private ObservableCollection<NoteModel> notes = new ObservableCollection<NoteModel>();
+        private ObservableCollection<Grouping<string, NoteModel>> noteGroups = new ObservableCollection<Grouping<string, NoteModel>>();
         private int _previousNoteCount = 0;
         private Timer _refreshTimer;
 
@@ -16,8 +18,7 @@ namespace plz_fix.pages.dash.profilepages
         {
             InitializeComponent();
             _username = username;
-            NotesCollectionView.ItemsSource = notes;
-            StartAutoRefresh();
+            NotesCollectionView.ItemsSource = noteGroups;
         }
 
         protected override void OnAppearing()
@@ -25,6 +26,8 @@ namespace plz_fix.pages.dash.profilepages
             base.OnAppearing();
             Shell.SetNavBarIsVisible(this, false);
             NavigationPage.SetHasNavigationBar(this, false);
+
+            StartAutoRefresh();
             _ = LoadNotes();
         }
 
@@ -55,10 +58,12 @@ namespace plz_fix.pages.dash.profilepages
                     await conn.OpenAsync();
 
                     string query = @"
-                        SELECT N.Score, S.Name AS SubjectName
+                        SELECT N.Score, S.Name AS SubjectName, NS.Name AS NatureSeanceName
                         FROM Note N
-                        INNER JOIN [UserApp] U ON N.Student = U.OID
-                        INNER JOIN [Subject] S ON S.OID = N.Subject
+                        INNER JOIN Subject S ON S.OID = N.Subject
+                        LEFT JOIN NatureSeance NS ON NS.OID = N.NatureSeance
+                        INNER JOIN Profile P ON N.Student = P.OID
+                        INNER JOIN UserApp U ON P.OID = U.Profile
                         WHERE U.Username = @Username";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -73,11 +78,11 @@ namespace plz_fix.pages.dash.profilepages
                                 newNotes.Add(new NoteModel
                                 {
                                     SubjectName = reader["SubjectName"].ToString(),
-                                    Score = Convert.ToDecimal(reader["Score"])
+                                    Score = Convert.ToDecimal(reader["Score"]),
+                                    NatureSeanceName = reader["NatureSeanceName"] == DBNull.Value ? "Cour" : reader["NatureSeanceName"].ToString()
                                 });
                             }
 
-                            // If note count has increased, notify
                             if (newNotes.Count > _previousNoteCount)
                             {
                                 await LocalNotificationCenter.Current.Show(new NotificationRequest
@@ -91,15 +96,20 @@ namespace plz_fix.pages.dash.profilepages
                                         NotifyTime = DateTime.Now
                                     }
                                 });
-
                             }
 
                             _previousNoteCount = newNotes.Count;
 
-                            // Update observable collection
-                            notes.Clear();
-                            foreach (var note in newNotes)
-                                notes.Add(note);
+                            // Group notes by NatureSeance
+                            var grouped = newNotes
+                                .GroupBy(n => n.NatureSeanceName)
+                                .Select(g => new Grouping<string, NoteModel>(g.Key, g))
+                                .ToList();
+
+                            // Update UI
+                            noteGroups.Clear();
+                            foreach (var group in grouped)
+                                noteGroups.Add(group);
                         }
                     }
                 }
@@ -109,11 +119,55 @@ namespace plz_fix.pages.dash.profilepages
                 await DisplayAlert("Error", "Failed to load notes: " + ex.Message, "OK");
             }
         }
-    }
 
-    public class NoteModel
-    {
-        public string SubjectName { get; set; }
-        public decimal Score { get; set; }
+        public static class NoteData
+        {
+            public static int GetNoteCount(string username)
+            {
+                int count = 0;
+                string sqlconn = "Data Source=DESKTOP-V0T4PRO\\USER19;Initial Catalog=XAF;User Id=sa;Password=123456789;TrustServerCertificate=True;Encrypt=True;";
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(sqlconn))
+                    {
+                        conn.Open();
+                        string query = @"
+                            SELECT COUNT(*) 
+                            FROM Note N
+                            INNER JOIN Profile P ON N.Student = P.OID
+                            INNER JOIN UserApp U ON P.OID = U.Profile
+                            WHERE U.Username = @Username";
+
+                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@Username", username);
+                            count = (int)cmd.ExecuteScalar();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Failed to get note count: " + ex.Message);
+                }
+                return count;
+            }
+        }
+
+        public class NoteModel
+        {
+            public string SubjectName { get; set; }
+            public decimal Score { get; set; }
+            public string NatureSeanceName { get; set; }
+        }
+
+        // Helper class for grouping
+        public class Grouping<K, T> : ObservableCollection<T>
+        {
+            public K Key { get; }
+            public Grouping(K key, IEnumerable<T> items) : base(items)
+            {
+                Key = key;
+            }
+        }
     }
 }

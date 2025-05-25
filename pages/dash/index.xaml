@@ -1,201 +1,130 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="plz_fix.pages.dash.index"
              x:Name="DashboardPage"
              Title="Dashboard" 
-    IconImageSource="dashboard_icon.png">
-    <!-- Optional icon -->
-
-    <ScrollView>
-        <VerticalStackLayout Padding="20">
-
-            <!-- Header Section with Pay Button -->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <VerticalStackLayout Grid.Column="0">
-                    <Label Text="Hi, Student" FontSize="24" FontAttributes="Bold" />
-                    <Label Text="Here is your activity today." FontSize="16" TextColor="Gray" />
-                </VerticalStackLayout>
-
-                <!-- Pay Button -->
-                <Button Grid.Column="1" 
-                        Text="Pay" 
-                        Clicked="OnPayButtonClicked"
-                        BackgroundColor="#2563EB"
-                        TextColor="White"
-                        CornerRadius="10"
-                        Padding="15,5"
-                        HorizontalOptions="End"
-                        VerticalOptions="Start"/>
-            </Grid>
-          
-            <!-- Stats Section (2x2 Grid) -->
-            <Grid Margin="0,20,0,20">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <!-- Presence Card -->
-                <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="#F7F9FC" CornerRadius="15" Padding="15" Margin="5" HasShadow="True">
-                    <VerticalStackLayout HorizontalOptions="Start">
-                        <Label Text="89%" FontSize="20" FontAttributes="Bold" TextColor="#F59E0B"/>
-                        <Label Text="Presence" FontSize="14" TextColor="Gray"/>
+             IconImageSource="dashboard_icon.png">
+    <RefreshView x:Name="MainRefreshView" Command="{Binding RefreshCommand}">
+        <ScrollView>
+            <VerticalStackLayout Padding="20">
+                <!-- Header Section -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <VerticalStackLayout Grid.Column="0">
+                        <Label x:Name="UsernameLabel" FontSize="24" FontAttributes="Bold" />
+                        <Label Text="Here is your activity today." FontSize="16" TextColor="Gray" />
                     </VerticalStackLayout>
-                </Frame>
+                </Grid>
 
-                <!-- Completeness Card -->
-                <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="#F7F9FC" CornerRadius="15" Padding="15" Margin="5" HasShadow="True">
-                    <VerticalStackLayout HorizontalOptions="Start">
-                        <Label Text="100%" FontSize="20" FontAttributes="Bold" TextColor="#2563EB"/>
-                        <Label Text="Completeness" FontSize="14" TextColor="Gray"/>
-                    </VerticalStackLayout>
-                </Frame>
+                <!-- Stats Section -->
+                <Grid Margin="0,20,0,20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <!-- Assignments Card -->
-                <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="#F7F9FC" CornerRadius="15" Padding="15" Margin="5" HasShadow="True">
-                    <VerticalStackLayout HorizontalOptions="Start">
-                        <Label Text="18" FontSize="20" FontAttributes="Bold" TextColor="#10B981"/>
-                        <Label Text="Assignments" FontSize="14" TextColor="Gray"/>
-                    </VerticalStackLayout>
-                </Frame>
+                    <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="#F7F9FC" CornerRadius="15" Padding="15" Margin="5" HasShadow="True">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnPresenceTapped"/>
+                        </Frame.GestureRecognizers>
+                        <VerticalStackLayout HorizontalOptions="Start">
+                            <Label Text="3" FontSize="20" FontAttributes="Bold" TextColor="#F59E0B"/>
+                            <Label Text="Presence" FontSize="14" TextColor="Gray"/>
+                        </VerticalStackLayout>
+                    </Frame>
 
-                <!-- Total Subject Card -->
-                <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="#F7F9FC" CornerRadius="15" Padding="15" Margin="5" HasShadow="True">
-                    <VerticalStackLayout HorizontalOptions="Start">
-                        <Label Text="12" FontSize="20" FontAttributes="Bold" TextColor="#F59E0B"/>
-                        <Label Text="Total Subject" FontSize="14" TextColor="Gray"/>
-                    </VerticalStackLayout>
-                </Frame>
-            </Grid>
+                    <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="#F7F9FC" CornerRadius="15" Padding="15" Margin="5" HasShadow="True">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnCompletenessTapped"/>
+                        </Frame.GestureRecognizers>
+                        <VerticalStackLayout HorizontalOptions="Start">
+                            <Label x:Name="CompletenessLabel" Text="100%" FontSize="20" FontAttributes="Bold" TextColor="#2563EB"/>
+                            <Label Text="Completeness" FontSize="14" TextColor="Gray"/>
+                        </VerticalStackLayout>
+                    </Frame>
 
-            <!-- Quick Actions Section -->
-            <HorizontalStackLayout 
-    HorizontalOptions="Fill" 
-    Spacing="18"
-    Margin="0,0,0,10">
+                    <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="#F7F9FC" CornerRadius="15" Padding="15" Margin="5" HasShadow="True">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnPaymentTapped"/>
+                        </Frame.GestureRecognizers>
+                        <VerticalStackLayout HorizontalOptions="Start">
+                            <Label x:Name="PaymentLabel" Text="0 / 0" FontSize="20" FontAttributes="Bold" TextColor="#10B981"/>
+                            <Label Text="Payment" FontSize="14" TextColor="Gray"/>
+                        </VerticalStackLayout>
+                    </Frame>
 
-                <!-- Exam -->
-                <VerticalStackLayout HorizontalOptions="Center" Padding="10">
-                    <Frame WidthRequest="60" HeightRequest="60" CornerRadius="20"
+                    <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="#F7F9FC" CornerRadius="15" Padding="15" Margin="5" HasShadow="True">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnEvaluationTapped"/>
+                        </Frame.GestureRecognizers>
+                        <VerticalStackLayout HorizontalOptions="Start">
+                            <Label x:Name="EvaluationLabel" Text="0" FontSize="20" FontAttributes="Bold" TextColor="DarkGoldenrod"/>
+                            <Label Text="Evaluation" FontSize="14" TextColor="Gray"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </Grid>
+
+
+
+                <!-- Quick Actions Section -->
+                <HorizontalStackLayout HorizontalOptions="Fill" Spacing="18" Margin="0,0,0,10">
+                    <!-- Exam -->
+                    <VerticalStackLayout HorizontalOptions="Center" Padding="10">
+                        <Frame WidthRequest="60" HeightRequest="60" CornerRadius="20"
                BackgroundColor="#E0F2FE" Padding="10" HorizontalOptions="Center">
-                        <Image Source="dotnet_bot.png" HeightRequest="40" WidthRequest="40"/>
-                    </Frame>
-                    <Label Text="Exam" FontSize="14" TextColor="Gray" HorizontalOptions="Center" Margin="0,10,0,0"/>
-                </VerticalStackLayout>
+                            <Image Source="dotnet_bot.png" HeightRequest="40" WidthRequest="40"/>
+                        </Frame>
+                        <Label Text="Exam" FontSize="14" TextColor="Gray" HorizontalOptions="Center" Margin="0,10,0,0"/>
+                    </VerticalStackLayout>
 
-                <!-- Subjects -->
-                <VerticalStackLayout HorizontalOptions="Center" Padding="10">
-                    <Frame WidthRequest="60" HeightRequest="60" CornerRadius="20"
-               BackgroundColor="#FFEDD5" Padding="10" HorizontalOptions="Center">
-                        <Image Source="dotnet_bot.png" HeightRequest="40" WidthRequest="40"/>
-                    </Frame>
-                    <Label Text="Subjects" FontSize="14" TextColor="Gray" HorizontalOptions="Center" Margin="0,10,0,0"/>
-                </VerticalStackLayout>
+                    <!-- Subjects -->
+                    <VerticalStackLayout HorizontalOptions="Center" Padding="10">
+                        <Frame WidthRequest="60" HeightRequest="60" CornerRadius="20"
+           BackgroundColor="#FFEDD5" Padding="10" HorizontalOptions="Center">
+                            <!-- Update TapGestureRecognizer to navigate to the SchedulePage -->
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnScheduleTapped"/>
+                            </Frame.GestureRecognizers>
+                            <Image Source="dotnet_bot.png" HeightRequest="40" WidthRequest="40"/>
+                        </Frame>
+                        <Label Text="Schedule" FontSize="14" TextColor="Gray" HorizontalOptions="Center" Margin="0,10,0,0"/>
+                    </VerticalStackLayout>
 
-                <!-- Calendar -->
-                <VerticalStackLayout HorizontalOptions="Center" Padding="10">
-                    <Frame WidthRequest="60" HeightRequest="60" CornerRadius="20"
+
+                    <!-- Calendar -->
+                    <VerticalStackLayout HorizontalOptions="Center" Padding="10">
+                        <Frame WidthRequest="60" HeightRequest="60" CornerRadius="20"
                BackgroundColor="#FEF9C3" Padding="10" HorizontalOptions="Center">
-                        <Image Source="dotnet_bot.png" HeightRequest="40" WidthRequest="40"/>
-                    </Frame>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnCalendarTapped"/>
+                            </Frame.GestureRecognizers>
+                            <Image Source="dotnet_bot.png" HeightRequest="40" WidthRequest="40"/>
+                        </Frame>
                         <Label Text="Calendar" FontSize="14" TextColor="Gray" HorizontalOptions="Center" Margin="0,10,0,0"/>
-                </VerticalStackLayout>
+                    </VerticalStackLayout>
 
-                <!-- Record -->
-                <VerticalStackLayout HorizontalOptions="Center" Padding="10">
-                    <Frame WidthRequest="60" HeightRequest="60" CornerRadius="20"
+                    <!-- Record -->
+                    <VerticalStackLayout HorizontalOptions="Center" Padding="10">
+                        <Frame WidthRequest="60" HeightRequest="60" CornerRadius="20"
                BackgroundColor="#D1FAE5" Padding="10" HorizontalOptions="Center">
-                        <Image Source="dotnet_bot.png" HeightRequest="40" WidthRequest="40"/>
-                    </Frame>
-                            <Label Text="Record" FontSize="14" TextColor="Gray" HorizontalOptions="Center" Margin="0,10,0,0"/>
-                </VerticalStackLayout>
-
-            </HorizontalStackLayout>
-
-
-
-
-            <!-- To-Do Section -->
-            <Label Text="To Do" FontSize="20" FontAttributes="Bold" Margin="0,10,0,10" />
-
-            <VerticalStackLayout Spacing="10">
-                <!-- Task Item 1 -->
-                <Frame BackgroundColor="White" Padding="15" CornerRadius="10" HasShadow="True">
-                    <VerticalStackLayout>
-                        <!-- Work name and Date in the same row -->
-                        <Grid ColumnDefinitions="*, Auto">
-                            <Label Text="Work name" FontSize="16" FontAttributes="Bold"
-                       Grid.Column="0" VerticalOptions="Center"/>
-
-                            <Frame Padding="5,2" CornerRadius="10" BackgroundColor="#B0D6FF" Grid.Column="1">
-                                <Label Text="April.19 12:31" FontSize="12" TextColor="Black"/>
-                            </Frame>
-                        </Grid>
-
-                        <!-- Work Description (fills full width) -->
-                        <Label Text="Work description Work description Work description Work description" 
-                   FontSize="14" TextColor="Gray"/>
+                            <Image Source="dotnet_bot.png" HeightRequest="40" WidthRequest="40"/>
+                        </Frame>
+                        <Label Text="Record" FontSize="14" TextColor="Gray" HorizontalOptions="Center" Margin="0,10,0,0"/>
                     </VerticalStackLayout>
-                </Frame>
+                </HorizontalStackLayout>
 
-                <!-- Task Item 2 -->
-                <Frame BackgroundColor="White" Padding="15" CornerRadius="10" HasShadow="True">
-                    <VerticalStackLayout>
-                        <Grid ColumnDefinitions="*, Auto">
-                            <Label Text="Web Project" FontSize="16" FontAttributes="Bold"
-                       Grid.Column="0" VerticalOptions="Center"/>
+                <!-- To Do Section -->
+                <Label Text="To Do" FontSize="20" FontAttributes="Bold" Margin="0,10,0,10" />
+                <VerticalStackLayout x:Name="ToDoList" Spacing="10" />
 
-                            <Frame Padding="5,2" CornerRadius="10" BackgroundColor="#B0D6FF" Grid.Column="1">
-                                <Label Text="April.19 16:20" FontSize="12" TextColor="Black"/>
-                            </Frame>
-                        </Grid>
-
-                        <Label Text="Work description Work description Work description Work description" 
-                   FontSize="14" TextColor="Gray"/>
-                    </VerticalStackLayout>
-                </Frame>
-
-                <!-- Task Item 3 -->
-                <Frame BackgroundColor="White" Padding="15" CornerRadius="10" HasShadow="True">
-                    <VerticalStackLayout>
-                        <Grid ColumnDefinitions="*, Auto">
-                            <Label Text="Record Notes" FontSize="16" FontAttributes="Bold"
-                       Grid.Column="0" VerticalOptions="Center"/>
-
-                            <Frame Padding="5,2" CornerRadius="10" BackgroundColor="#B0D6FF" Grid.Column="1">
-                                <Label Text="April.19 19:07" FontSize="12" TextColor="Black"/>
-                            </Frame>
-                        </Grid>
-
-                        <Label Text="Work description Work description Work description Work description" 
-                   FontSize="14" TextColor="Gray"/>
-                    </VerticalStackLayout>
-                </Frame>
             </VerticalStackLayout>
-
-
-
-
-
-
-
-
-
-        </VerticalStackLayout>
-    </ScrollView>
-
-
-
-
-
+        </ScrollView>
+    </RefreshView>
 </ContentPage>

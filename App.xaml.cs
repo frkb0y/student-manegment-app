@@ -13,11 +13,20 @@ namespace plz_fix
             _localizationResourceManager = localizationResourceManager;
             InitializeComponent();
 
-            MainPage = new NavigationPage(new pages.login.start(localizationResourceManager));
+            // Set the main page of the app with a NavigationPage wrapper
+            var navigationPage = new NavigationPage(new pages.login.loginpage());
+            
+            // Hide the navigation bar globally for all pages
+            navigationPage.Pushed += (sender, e) =>
+            {
+                if (e.Page is Page page)
+                {
+                    Shell.SetNavBarIsVisible(page, false);
+                    NavigationPage.SetHasNavigationBar(page, false);
+                }
+            };
 
+            MainPage = navigationPage;
         }
-
-      
     }
-
 }

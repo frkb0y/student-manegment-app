@@ -20,11 +20,13 @@ namespace plz_fix.pages.dash
                 DescriptionEditor.Text = task.WorkDescription;
                 StartDatePicker.Date = task.StartDate;
                 StartTimePicker.Time = task.StartDate.TimeOfDay;
+                CompletedCheckBox.IsChecked = task.IsCompleted;
             }
             else
             {
                 StartDatePicker.Date = DateTime.Today;
                 StartTimePicker.Time = DateTime.Now.TimeOfDay;
+                CompletedCheckBox.IsChecked = false;
             }
         }
 
@@ -40,13 +42,13 @@ namespace plz_fix.pages.dash
                     await conn.OpenAsync();
                     string query;
 
-                    if (currentTask == null) // Insert new task
+                    if (currentTask == null)
                     {
-                        query = "INSERT INTO Todo (WorkName, WorkDescription, StartDate) VALUES (@name, @desc, @start)";
+                        query = "INSERT INTO Todo (WorkName, WorkDescription, StartDate, IsCompleted) VALUES (@name, @desc, @start, @isCompleted)";
                     }
-                    else // Update existing task
+                    else
                     {
-                        query = "UPDATE Todo SET WorkName = @name, WorkDescription = @desc, StartDate = @start WHERE OID = @oid";
+                        query = "UPDATE Todo SET WorkName = @name, WorkDescription = @desc, StartDate = @start, IsCompleted = @isCompleted WHERE OID = @oid";
                     }
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -54,6 +56,7 @@ namespace plz_fix.pages.dash
                         cmd.Parameters.AddWithValue("@name", WorkNameEntry.Text);
                         cmd.Parameters.AddWithValue("@desc", DescriptionEditor.Text);
                         cmd.Parameters.AddWithValue("@start", combinedDate);
+                        cmd.Parameters.AddWithValue("@isCompleted", CompletedCheckBox.IsChecked);
 
                         if (currentTask != null)
                             cmd.Parameters.AddWithValue("@oid", currentTask.OID);

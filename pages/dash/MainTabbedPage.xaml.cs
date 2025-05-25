@@ -9,13 +9,21 @@ namespace plz_fix.pages.dash
             InitializeComponent();
             _username = username;
 
-            // Pass username to each page that needs it
+            // Add all tabs
             Children.Clear();
-            Children.Add(new index());
-            Children.Add(new classes());
-            Children.Add(new task());
-            Children.Add(new chat());
-            Children.Add(new profile(_username)); // <-- Pass username here
+            Children.Add(new index(_username) { IconImageSource = "icons/dashicon/dashbord.png", Title = "" });
+            Children.Add(new classes(_username) { IconImageSource = "icons/dashicon/classes.png", Title = "" });
+            Children.Add(new task(_username) { IconImageSource = "icons/dashicon/task.png", Title = "" });
+            Children.Add(new chat() { IconImageSource = "icons/dashicon/chat.png", Title = "" });
+            Children.Add(new profile(_username) { IconImageSource = "icons/dashicon/profile.png", Title = "" });
+
+
+
+            // Listen for tab switch messages
+            MessagingCenter.Subscribe<index>(this, "GoToClassesTab", (sender) =>
+            {
+                this.CurrentPage = this.Children[1]; // 1 = classes
+            });
         }
 
         protected override void OnAppearing()

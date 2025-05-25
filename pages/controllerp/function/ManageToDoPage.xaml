@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="plz_fix.pages.controllerp.function.ManageToDoPage"
+             Title="Manage To-Do">
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="25">
+
+            <!-- Styled Header -->
+            <Frame BackgroundColor="#2C3E50" CornerRadius="15" Padding="20" HasShadow="True">
+                <Label 
+                    Text="Manage To-Do Tasks" 
+                    FontSize="24" 
+                    FontAttributes="Bold" 
+                    HorizontalOptions="Center" 
+                    TextColor="White" />
+            </Frame>
+
+            <!-- Class Selection -->
+            <Label Text="Select Class" FontSize="18" FontAttributes="Bold" TextColor="#34495E"/>
+            <Frame BackgroundColor="#ECF0F1" CornerRadius="15" Padding="10" HasShadow="True">
+                <Picker x:Name="ClassPicker" Title="Choose a class" FontSize="16" SelectedIndexChanged="OnClassSelected"/>
+            </Frame>
+
+            <!-- (OPTIONAL) Students List (read-only) -->
+            <Label Text="Students in Class" FontSize="18" FontAttributes="Bold" TextColor="#34495E"/>
+            <CollectionView x:Name="StudentsCollectionView" SelectionMode="None" HeightRequest="80">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Label Text="{Binding Name}" FontSize="16" TextColor="#34495E" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- To-Do Details -->
+            <Label Text="Work Name" FontSize="18" FontAttributes="Bold" TextColor="#34495E"/>
+            <Frame BackgroundColor="#ECF0F1" CornerRadius="15" Padding="10" HasShadow="True">
+                <Entry x:Name="WorkNameEntry" Placeholder="Enter work name" FontSize="16" />
+            </Frame>
+
+            <Label Text="Work Description" FontSize="18" FontAttributes="Bold" TextColor="#34495E"/>
+            <Frame BackgroundColor="#ECF0F1" CornerRadius="15" Padding="10" HasShadow="True">
+                <Editor x:Name="WorkDescriptionEditor" HeightRequest="100" Placeholder="Enter work description" FontSize="16" />
+            </Frame>
+
+            <Label Text="Start Date" FontSize="18" FontAttributes="Bold" TextColor="#34495E"/>
+            <DatePicker x:Name="StartDatePicker" />
+
+            <Label Text="End Date" FontSize="18" FontAttributes="Bold" TextColor="#34495E"/>
+            <DatePicker x:Name="EndDatePicker" />
+
+            <!-- Save Button -->
+            <Button 
+                Text="Assign To-Do" 
+                Clicked="OnAssignToDoClicked" 
+                BackgroundColor="#3498DB" 
+                TextColor="White" 
+                FontAttributes="Bold" 
+                HeightRequest="50" 
+                CornerRadius="15" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

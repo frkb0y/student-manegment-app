@@ -14,10 +14,10 @@
                        HorizontalOptions="Center" Padding="10">
                     <Image Source="profile_placeholder.png" WidthRequest="110" HeightRequest="110"/>
                 </Frame>
-                <Label Text="Lucas Scott" FontSize="24" FontAttributes="Bold" TextColor="Black"
-                       HorizontalOptions="Center"/>
-                <Label Text="@lucasscott3" FontSize="16" TextColor="Gray"
-                       HorizontalOptions="Center"/>
+                <Label x:Name="Usernamen" FontSize="24" FontAttributes="Bold" TextColor="Black"
+                       HorizontalOptions="Center" />
+                <Label x:Name="UsernameTag" FontSize="16" TextColor="Gray"
+       HorizontalOptions="Center"/>
             </VerticalStackLayout>
 
             <!-- Note Section -->

@@ -8,10 +8,12 @@ namespace plz_fix.pages.dash
 {
     public partial class task : ContentPage
     {
-        public task()
+        private string _username;
+
+        public task(string username)
         {
             InitializeComponent();
-            LoadTasksFromDatabase();
+            _username = username;
         }
 
         protected override void OnAppearing()
@@ -19,10 +21,10 @@ namespace plz_fix.pages.dash
             base.OnAppearing();
             Shell.SetNavBarIsVisible(this, false);
             NavigationPage.SetHasNavigationBar(this, false);
-            LoadTasksFromDatabase();
+            LoadTasksForUser(_username);
         }
 
-        private async void LoadTasksFromDatabase()
+        private async void LoadTasksForUser(string username)
         {
             string connectionString = "Data Source=DESKTOP-V0T4PRO\\USER19;Initial Catalog=XAF;User ID=sa;Password=123456789;TrustServerCertificate=True;Encrypt=True;";
             var tasks = new List<TodoModel>();
@@ -32,32 +34,60 @@ namespace plz_fix.pages.dash
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     await conn.OpenAsync();
-                    string query = "SELECT OID, WorkName, WorkDescription, StartDate FROM Todo";
 
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    // First get the OID of the user
+                    string getUserOidQuery = "SELECT OID FROM UserApp WHERE Username = @Username";
+                    int userOid = -1;
+
+                    using (SqlCommand cmd = new SqlCommand(getUserOidQuery, conn))
                     {
-                        while (await reader.ReadAsync())
+                        cmd.Parameters.AddWithValue("@Username", username);
+                        var result = await cmd.ExecuteScalarAsync();
+                        if (result != null)
+                            userOid = Convert.ToInt32(result);
+                        else
                         {
-                            tasks.Add(new TodoModel
+                            await DisplayAlert("Error", "User not found", "OK");
+                            return;
+                        }
+                    }
+
+                    // Now get the tasks assigned to that user, include sender's name!
+                    string getTasksQuery = @"
+                        SELECT t.OID, t.WorkName, t.WorkDescription, t.StartDate,
+                               p.FirstName, p.LastName
+                        FROM Todo t
+                        LEFT JOIN Profile p ON t.CreatedBy = p.OID
+                        WHERE t.AssignedTo = @UserOid";
+
+                    using (SqlCommand cmd = new SqlCommand(getTasksQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UserOid", userOid);
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
                             {
-                                OID = Convert.ToInt32(reader["OID"]),
-                                WorkName = reader["WorkName"].ToString(),
-                                WorkDescription = reader["WorkDescription"].ToString(),
-                                StartDate = Convert.ToDateTime(reader["StartDate"])
-                            });
+                                string firstName = reader["FirstName"] as string ?? "";
+                                string lastName = reader["LastName"] as string ?? "";
+                                string createdByName = (firstName + " " + lastName).Trim();
+
+                                tasks.Add(new TodoModel
+                                {
+                                    OID = Convert.ToInt32(reader["OID"]),
+                                    WorkName = reader["WorkName"].ToString(),
+                                    WorkDescription = reader["WorkDescription"].ToString(),
+                                    StartDate = Convert.ToDateTime(reader["StartDate"]),
+                                    CreatedByName = createdByName
+                                });
+                            }
                         }
                     }
                 }
 
-                // Bind the tasks to the CollectionView
                 TaskListView.ItemsSource = tasks;
 
-                // If no tasks are found, display empty view
                 if (tasks.Count == 0)
-                {
-                    await DisplayAlert("No Tasks", "You have no tasks at the moment.", "OK");
-                }
+                    await DisplayAlert("No Tasks", "You have no assigned tasks.", "OK");
             }
             catch (Exception ex)
             {
@@ -70,11 +100,6 @@ namespace plz_fix.pages.dash
             var task = (sender as Frame)?.BindingContext as TodoModel;
             if (task != null)
                 await Navigation.PushAsync(new TaskEditPage(task));
-        }
-
-        private async void OnCalendarButtonClicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new CalendarPage());
         }
 
         private async void OnAddTaskClicked(object sender, EventArgs e)

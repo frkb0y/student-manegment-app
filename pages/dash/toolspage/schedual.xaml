@@ -2,11 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:scheduler="clr-namespace:Syncfusion.Maui.Scheduler;assembly=Syncfusion.Maui.Scheduler"
-             x:Class="plz_fix.pages.dash.CalendarPage"
-             Title="Calendar">
+             x:Class="plz_fix.pages.dash.toolspage.schedual">
 
     <scheduler:SfScheduler x:Name="Scheduler"
-                           View="Month" 
+                           View="Week"
+                           AppointmentsSource="{Binding Appointments}"
+                           AllowedViews="Day,Week,WorkWeek,Month"
                            HorizontalOptions="FillAndExpand"
                            VerticalOptions="FillAndExpand" />
 </ContentPage>

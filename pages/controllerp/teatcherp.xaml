@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="plz_fix.pages.controllerp.teatcherp"
+             Title="Teacher Panel">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="25">
+
+            <!-- Header Section, dashboard style -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <VerticalStackLayout Grid.Column="0">
+                    <Label Text="Teacher Panel" FontSize="26" FontAttributes="Bold" TextColor="#1a237e" />
+                    <Label Text="Here are your main actions." FontSize="16" TextColor="Gray" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Teacher Info Card -->
+            <Frame Padding="20" Margin="0,0,0,10" CornerRadius="18" BackgroundColor="#F7F9FC" HasShadow="True">
+                <VerticalStackLayout Spacing="6">
+                    <Label x:Name="TeacherNameLabel" Text="..." FontSize="20" FontAttributes="Bold" TextColor="#2563EB"/>
+                    <Label x:Name="TeacherSubjectLabel" Text="Subject: ..." FontSize="15" TextColor="#0284C7"/>
+                    <Label x:Name="TeacherContactLabel" Text="Contact: ..." FontSize="15" TextColor="#333"/>
+                    <Label x:Name="TeacherBirthDateLabel" Text="" FontSize="15" TextColor="#333"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Actions as Cards -->
+            <Grid ColumnSpacing="12" RowSpacing="14">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Manage Notes Card -->
+                <Frame Grid.Row="0" Grid.Column="0"
+                       CornerRadius="16"
+                       BackgroundColor="#E0F2FE"
+                       Padding="15"
+                       Margin="2"
+                       HasShadow="True">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnManageNotesClicked"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout HorizontalOptions="Center">
+                        <Label Text="Manage Notes" FontSize="18" FontAttributes="Bold" TextColor="#0284C7" HorizontalOptions="Center"/>
+                        <Label Text="Add or edit students' notes." FontSize="13" TextColor="Gray" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Manage Subjects Card -->
+                <Frame Grid.Row="0" Grid.Column="1"
+                       CornerRadius="16"
+                       BackgroundColor="#FFEDD5"
+                       Padding="15"
+                       Margin="2"
+                       HasShadow="True">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnManageSubjectsClicked"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout HorizontalOptions="Center">
+                        <Label Text="Manage Subjects" FontSize="18" FontAttributes="Bold" TextColor="#EA580C" HorizontalOptions="Center"/>
+                        <Label Text="Edit or assign subjects." FontSize="13" TextColor="Gray" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- To-Do List Card -->
+                <Frame Grid.Row="1" Grid.Column="0"
+                       CornerRadius="16"
+                       BackgroundColor="#FEF9C3"
+                       Padding="15"
+                       Margin="2"
+                       HasShadow="True">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnManageToDoClicked"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout HorizontalOptions="Center">
+                        <Label Text="To-Do List" FontSize="18" FontAttributes="Bold" TextColor="#CA8A04" HorizontalOptions="Center"/>
+                        <Label Text="Track your tasks." FontSize="13" TextColor="Gray" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Manage Events Card -->
+                <Frame Grid.Row="1" Grid.Column="1"
+                       CornerRadius="16"
+                       BackgroundColor="#D1FAE5"
+                       Padding="15"
+                       Margin="2"
+                       HasShadow="True">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnManageEventsClicked"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout HorizontalOptions="Center">
+                        <Label Text="Manage Events" FontSize="18" FontAttributes="Bold" TextColor="#059669" HorizontalOptions="Center"/>
+                        <Label Text="Set and update events." FontSize="13" TextColor="Gray" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Manage Absences (spans both columns) -->
+                <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                       CornerRadius="16"
+                       BackgroundColor="#FCE7F3"
+                       Padding="15"
+                       Margin="2"
+                       HasShadow="True">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnManageAbsencesClicked"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout HorizontalOptions="Center">
+                        <Label Text="Manage Absences" FontSize="18" FontAttributes="Bold" TextColor="#DB2777" HorizontalOptions="Center"/>
+                        <Label Text="Review and update absences." FontSize="13" TextColor="Gray" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

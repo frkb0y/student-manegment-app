@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="plz_fix.pages.controllerp.function.ManageAccountsPage"
+             Title="Manage Accounts">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="Manage Accounts" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <!-- Add/Edit Account Section -->
+            <Frame Padding="10" CornerRadius="10" BackgroundColor="#ECF0F1">
+                <VerticalStackLayout Spacing="10">
+                    <Entry x:Name="UsernameEntry" Placeholder="Username" />
+                    <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" />
+                    <Picker x:Name="RolePicker" Title="Select Role" />
+                    <Picker x:Name="ProfilePicker" Title="Select Profile" />
+                    <HorizontalStackLayout Spacing="10">
+                        <Button x:Name="SaveButton" Text="Save" Clicked="OnSaveAccountClicked" BackgroundColor="#27ae60" TextColor="White"/>
+                        <Button x:Name="ClearButton" Text="Clear" Clicked="OnClearClicked" BackgroundColor="#95a5a6" TextColor="White"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Accounts List -->
+            <CollectionView x:Name="AccountsCollectionView" SelectionMode="Single" ItemsSource="{Binding AccountsList}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" CornerRadius="10" Margin="0,5" BackgroundColor="#F8F9F9">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Username}" FontSize="18" FontAttributes="Bold"/>
+                                <Label Text="{Binding RoleName}" FontSize="14" />
+                                <Label Text="{Binding ProfileName}" FontSize="14" />
+                                <HorizontalStackLayout Spacing="10">
+                                    <Button Text="Edit" Clicked="OnEditAccountClicked" CommandParameter="{Binding .}" BackgroundColor="#2980b9" TextColor="White"/>
+                                    <Button Text="Delete" Clicked="OnDeleteAccountClicked" CommandParameter="{Binding .}" BackgroundColor="#c0392b" TextColor="White"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -16,6 +16,9 @@
             <Label Text="Start Time"/>
             <TimePicker x:Name="StartTimePicker"/>
 
+            <Label Text="Completed"/>
+            <CheckBox x:Name="CompletedCheckBox"/>
+
             <Button Text="Save" Clicked="OnSaveClicked"/>
         </VerticalStackLayout>
     </ScrollView>

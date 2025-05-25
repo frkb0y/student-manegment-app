@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="plz_fix.pages.controllerp.function.ManageSubjectsPage"
+             Title="Manage Subjects">
+    <Grid Padding="20" RowDefinitions="Auto, Auto, *" RowSpacing="25">
+
+        <!-- Styled Header -->
+        <Frame Grid.Row="0" BackgroundColor="#2C3E50" CornerRadius="15" Padding="20" HasShadow="True">
+            <Label 
+                Text="Manage Subjects" 
+                FontSize="24" 
+                FontAttributes="Bold" 
+                HorizontalOptions="Center" 
+                TextColor="White" />
+        </Frame>
+
+        <!-- Add New Subject Section -->
+        <VerticalStackLayout Grid.Row="1" Spacing="15">
+            <Label Text="Add New Subject" FontSize="18" FontAttributes="Bold" TextColor="#34495E"/>
+            <Frame BackgroundColor="#ECF0F1" CornerRadius="15" Padding="10" HasShadow="True">
+                <Entry x:Name="NewSubjectEntry" Placeholder="Enter subject name" FontSize="16" />
+            </Frame>
+            <Button 
+                Text="Add Subject" 
+                Clicked="OnAddSubjectClicked" 
+                BackgroundColor="#3498DB" 
+                TextColor="White" 
+                FontAttributes="Bold" 
+                HeightRequest="50" 
+                CornerRadius="15" />
+        </VerticalStackLayout>
+
+        <!-- Subjects List -->
+        <VerticalStackLayout Grid.Row="2" Spacing="15" Padding="0,20,0,0">
+            <Label Text="Subjects List" FontSize="18" FontAttributes="Bold" TextColor="#34495E"/>
+            <CollectionView x:Name="SubjectsCollectionView" VerticalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="5" Padding="10" BackgroundColor="#ECF0F1" CornerRadius="10">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" TextColor="#2C3E50" />
+                                <Label Text="Subject ID: {Binding OID}" FontSize="14" TextColor="#7F8C8D" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

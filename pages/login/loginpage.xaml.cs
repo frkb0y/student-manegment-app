@@ -10,7 +10,6 @@ namespace plz_fix.pages.login
             InitializeComponent();
         }
 
-
         private void OnEyeIconClicked(object sender, EventArgs e)
         {
             // Toggle the IsPassword property of the Entry
@@ -34,20 +33,12 @@ namespace plz_fix.pages.login
             }
         }
 
-
-
         protected override void OnAppearing()
         {
             base.OnAppearing();
             Shell.SetNavBarIsVisible(this, false);
             NavigationPage.SetHasNavigationBar(this, false);
         }
-
-
-
-
-
-
 
         private async void LoginClicked(object sender, EventArgs e)
         {
@@ -75,8 +66,8 @@ namespace plz_fix.pages.login
                 {
                     await sqlConnection.OpenAsync();
 
-                    // Query to match the UserName and Password in the UserLogin table
-                    string query = "SELECT COUNT(*) FROM XAF.dbo.UserApp WHERE Username=@Username AND Password=@Password";
+                    // Query to fetch the user's role
+                    string query = "SELECT Role FROM XAF.dbo.UserApp WHERE Username=@Username AND Password=@Password";
 
                     using (SqlCommand cmd = new SqlCommand(query, sqlConnection))
                     {
@@ -84,11 +75,29 @@ namespace plz_fix.pages.login
                         cmd.Parameters.AddWithValue("@Username", username);
                         cmd.Parameters.AddWithValue("@Password", password);  // Adjust this depending on how your passwords are stored
 
-                        int count = (int)await cmd.ExecuteScalarAsync();
+                        var role = await cmd.ExecuteScalarAsync();
 
-                        if (count > 0)
+                        if (role != null)
                         {
-                            await Navigation.PushAsync(new pages.dash.MainTabbedPage(username));
+                            int userRole = Convert.ToInt32(role);
+
+                            // Navigate based on the user's role
+                            if (userRole == 3) // Admin
+                            {
+                                await Navigation.PushAsync(new plz_fix.pages.controllerp.adminp());
+                            }
+                            else if (userRole == 1) // Student
+                            {
+                                await Navigation.PushAsync(new plz_fix.pages.dash.MainTabbedPage(username));
+                            }
+                            else if (userRole == 2) // Teacher
+                            {
+                                await Navigation.PushAsync(new plz_fix.pages.controllerp.teatcherp(username));
+                            }
+                            else
+                            {
+                                await DisplayAlert("Error", "Invalid Role", "OK");
+                            }
                         }
                         else
                         {
@@ -102,28 +111,5 @@ namespace plz_fix.pages.login
                 await DisplayAlert("Database Error", ex.Message, "OK");
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

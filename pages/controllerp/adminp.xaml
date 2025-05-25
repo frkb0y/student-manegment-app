@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="plz_fix.pages.controllerp.adminp"
+             Title="Admin Panel">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="25">
+
+            <!-- Header Section, dashboard style -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <VerticalStackLayout Grid.Column="0">
+                    <Label Text="Admin Panel" FontSize="26" FontAttributes="Bold" TextColor="#0d47a1" />
+                    <Label Text="Here are your main admin actions." FontSize="16" TextColor="Gray" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Admin Info Card (you can bind admin info here if desired) -->
+            <Frame Padding="20" Margin="0,0,0,10" CornerRadius="18" BackgroundColor="#F7F9FC" HasShadow="True">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Welcome, Admin" FontSize="20" FontAttributes="Bold" TextColor="#2563EB"/>
+                    <Label Text="Manage platform roles, profiles, and accounts" FontSize="15" TextColor="#0284C7"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Actions as Cards -->
+            <Grid ColumnSpacing="12" RowSpacing="14">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Manage Roles Card -->
+                <Frame Grid.Row="0" Grid.Column="0"
+                       CornerRadius="16"
+                       BackgroundColor="#E0F2FE"
+                       Padding="15"
+                       Margin="2"
+                       HasShadow="True">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnManageRolesClicked"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout HorizontalOptions="Center">
+                        <Label Text="Manage Roles" FontSize="18" FontAttributes="Bold" TextColor="#0284C7" HorizontalOptions="Center"/>
+                        <Label Text="View and edit roles." FontSize="13" TextColor="Gray" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Manage Profiles Card -->
+                <Frame Grid.Row="0" Grid.Column="1"
+                       CornerRadius="16"
+                       BackgroundColor="#FFEDD5"
+                       Padding="15"
+                       Margin="2"
+                       HasShadow="True">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnManageProfilesClicked"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout HorizontalOptions="Center">
+                        <Label Text="Manage Profiles" FontSize="18" FontAttributes="Bold" TextColor="#EA580C" HorizontalOptions="Center"/>
+                        <Label Text="View and edit profiles." FontSize="13" TextColor="Gray" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Manage Accounts Card (spans both columns) -->
+                <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                       CornerRadius="16"
+                       BackgroundColor="#FCA5A5"
+                       Padding="15"
+                       Margin="2"
+                       HasShadow="True">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnManageAccountsClicked"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout HorizontalOptions="Center">
+                        <Label Text="Manage Accounts" FontSize="18" FontAttributes="Bold" TextColor="#B91C1C" HorizontalOptions="Center"/>
+                        <Label Text="View and edit user accounts." FontSize="13" TextColor="Gray" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

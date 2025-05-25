@@ -4,13 +4,21 @@
              x:Class="plz_fix.pages.dash.profilepages.note"
              Title="Notes">
 
-    <CollectionView x:Name="NotesCollectionView">
+    <CollectionView x:Name="NotesCollectionView"
+                    IsGrouped="True">
+        <CollectionView.GroupHeaderTemplate>
+            <DataTemplate>
+                <Frame BackgroundColor="#e3f2fd" CornerRadius="12" Padding="12" Margin="10,10,10,2">
+                    <Label Text="{Binding Key}" FontSize="20" FontAttributes="Bold" TextColor="#1a237e"/>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.GroupHeaderTemplate>
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Frame Margin="10" Padding="10" BackgroundColor="#f5f5f5" CornerRadius="12" HasShadow="True">
+                <Frame Margin="10,2,10,10" Padding="14" BackgroundColor="#f5f5f5" CornerRadius="12" HasShadow="True">
                     <VerticalStackLayout>
-                        <Label Text="{Binding SubjectName}" FontSize="20" FontAttributes="Bold" TextColor="#333"/>
-                        <Label Text="{Binding Score}" FontSize="16" TextColor="DarkGreen"/>
+                        <Label Text="{Binding SubjectName}" FontSize="18" FontAttributes="Bold" TextColor="#333"/>
+                        <Label Text="{Binding Score, StringFormat='Score: {0}'}" FontSize="15" TextColor="DarkGreen"/>
                     </VerticalStackLayout>
                 </Frame>
             </DataTemplate>

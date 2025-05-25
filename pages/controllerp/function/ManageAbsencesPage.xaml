@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="plz_fix.pages.controllerp.function.ManageAbsencesPage"
+             Title="Manage Absences">
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="25">
+
+            <!-- Styled Header -->
+            <Frame BackgroundColor="#34495E" CornerRadius="15" Padding="20" HasShadow="True">
+                <Label 
+                    Text="Manage Absences for Students" 
+                    FontSize="26" 
+                    FontAttributes="Bold" 
+                    HorizontalOptions="Center" 
+                    TextColor="White" />
+            </Frame>
+
+            <!-- Student Selection -->
+            <Label Text="Select Students" FontSize="20" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <CollectionView x:Name="StudentsCollectionView" SelectionMode="None" VerticalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                            <Label Text="{Binding Name}" FontSize="18" TextColor="#34495E" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Class Selection -->
+            <Label Text="Select Class" FontSize="20" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <Picker x:Name="ClassPicker" Title="Choose a class" FontSize="18" />
+
+            <!-- Salle Selection -->
+            <Label Text="Select Salle" FontSize="20" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <Picker x:Name="SallePicker" Title="Choose a salle" FontSize="18" />
+
+            <!-- Subject Selection -->
+            <Label Text="Select Subject" FontSize="20" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <Picker x:Name="SubjectPicker" Title="Choose a subject" FontSize="18" />
+
+            <!-- Absence Details -->
+            <Label Text="Absence Details" FontSize="20" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <Frame BackgroundColor="#ECF0F1" CornerRadius="15" Padding="10" HasShadow="True">
+                <Editor x:Name="AbsenceDetailsEditor" HeightRequest="100" Placeholder="Enter details (optional)" FontSize="18" />
+            </Frame>
+
+            <!-- Date of Absence -->
+            <Label Text="Date of Absence" FontSize="20" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <DatePicker x:Name="AbsenceDatePicker" />
+
+            <!-- Save Button -->
+            <Button 
+                Text="Record Absence" 
+                Clicked="OnRecordAbsenceClicked" 
+                BackgroundColor="#1ABC9C" 
+                TextColor="White" 
+                FontAttributes="Bold" 
+                HeightRequest="50" 
+                CornerRadius="15" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

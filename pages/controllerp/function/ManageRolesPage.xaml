@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="plz_fix.pages.controllerp.function.ManageRolesPage"
+             Title="Manage Roles">
+    <VerticalStackLayout Padding="20" Spacing="15">
+        <Label Text="Manage User Roles" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+
+        <!-- Add Role Section -->
+        <Frame Padding="10" CornerRadius="10" BackgroundColor="#ECF0F1">
+            <HorizontalStackLayout Spacing="10">
+                <Entry x:Name="NewRoleEntry" Placeholder="Add new role..." WidthRequest="200"/>
+                <Button Text="Add" Clicked="OnAddRoleClicked" BackgroundColor="#27ae60" TextColor="White"/>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <!-- Roles List -->
+        <CollectionView x:Name="RolesCollectionView" ItemsSource="{Binding RolesList}" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" CornerRadius="10" Margin="0,5" BackgroundColor="#F8F9F9">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="{Binding RoleName}" FontSize="18" VerticalOptions="Center"/>
+                            <Button Text="Edit" Clicked="OnEditRoleClicked" CommandParameter="{Binding .}" BackgroundColor="#2980b9" TextColor="White"/>
+                            <Button Text="Delete" Clicked="OnDeleteRoleClicked" CommandParameter="{Binding .}" BackgroundColor="#c0392b" TextColor="White"/>
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>
